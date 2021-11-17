@@ -3,8 +3,9 @@ from flask import Flask
 
 app = Flask(__name__)
 
-@app.route("/<debug>")
-def get_all_data(debug):
+@app.route("/<get_all_data>,defaults={'debug': None}")
+@app.route("/<get_all_data>/<debug>")
+def get_all_data(get_all_data,debug):
     if debug.lower() == 'true':
         print('Debugging')
     response = requests.get("https://6god8pgyzf.execute-api.us-west-2.amazonaws.com/databases").json()
